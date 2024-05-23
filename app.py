@@ -8,8 +8,11 @@ from langchain_community.vectorstores import FAISS #facebook AI similarity searc
 from langchain.chains.question_answering import load_qa_chain
 from langchain_community.llms import HuggingFaceHub
 
+import time
+
 
 def main():
+    start = time.time()
     load_dotenv()
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")

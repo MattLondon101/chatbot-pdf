@@ -9,23 +9,25 @@ To run this project, please follow the steps below:
 
 1. Clone the repository:
 
-```shell
-git clone git@github.com:MattLondon101/chatbot-pdf.git
-cd chatbot-pdf
-```
+    ```shell
+    git clone git@github.com:MattLondon101/chatbot-pdf.git
+    cd chatbot-pdf
+    ```
 
 2. Create and activate a conda virtual environment (optional but recommended):
 
-```shell
-conda create -n env1 python=3.10
-conda activate env1
-```
+    ```shell
+    conda create -n env1 python=3.10
+    conda activate env1
+    ```
 
-3. Install the dependencies from the `requirements.txt` file:
+3. Install the dependencies from the `requirements.txt` file:  
 
-```shell
-pip install -r requirements.txt
-```
+    NOTE: If you are not using a CUDA supported GPU, in `requirements.txt` line 1, change `faiss-gpu` to `faiss-cpu`.  
+
+    ```shell
+    pip install -r requirements.txt
+    ```
 
 4. You will need a HUGGINGFACEHUB_API_TOKEN for this next step. To obtain one for free, got to https://huggingface.co/ and Sign Up for a free account. Then, go to Settings > Access Tokens. Create a New token. Then, create a file in this directory, name is `.env` and enter `HUGGINGFACEHUB_API_TOKEN=token`,  replacing `token` with your User Access Token. Save the `.env` file. The `.gitignore` file will ignore the `.env` for git operation.
 

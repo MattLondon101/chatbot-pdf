@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-# import streamlit as st
+import streamlit as st
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings

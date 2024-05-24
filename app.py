@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import streamlit as st
+from prettytable import PrettyTable
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -9,6 +10,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_community.llms import HuggingFaceHub
 
 import time
+from line_profiler import LineProfiler
 
 
 def main():
@@ -47,7 +49,6 @@ def main():
             response = chain.run(input_documents=docs,question=user_question)
 
             st.write(response)
-
 
 
         # st.write(chunks)

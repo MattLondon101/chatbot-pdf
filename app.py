@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import streamlit as st
+import pandas as pd
 from prettytable import PrettyTable
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -17,11 +18,15 @@ def main():
 
     load_dotenv()
 
-    tabl = PrettyTable()
-    tabl.field_names= ["Question", "Answer"]
-    output_file = './output/transcript.txt'
-    with open(output_file, 'w') as outfi:
-        outfi.write(str(tabl))
+    df = pd.DataFrame(columns=['Question', 'Answer'])
+
+    # tabl = PrettyTable()
+    # tabl.field_names= ["Question", "Answer"]
+    # output_file = './output/transcript.txt'
+    ocsv = './output/transcript.csv'
+    df.to_csv(ocsv)
+    # with open(output_file, 'w') as outfi:
+    #     outfi.write(str(tabl))
 
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
@@ -57,10 +62,18 @@ def main():
 
             st.write(response)
 
-            table_rows = lambda tabl: len(tabl.get_string().split('\n'))-4
-            table_txt = tabl.get_string(start=table_rows(tabl)-1)
-            print(f"table_txt = {table_txt}")
+            # ndf = pd.DataFrame(data=[[user_question, response]], columns=None)
+            oldFrame = pd.read_csv(ocsv)
+            # df_diff = pd.concat([oldFrame, ndf], ignore_index=True)
+            # df_diff.to_csv(ocsv)
+            
+            oldFrame.loc[-1] = [user_question, response]
+            # df.t
+            print(f"df = {oldFrame}")   
 
+            # table_rows = lambda tabl: len(tabl.get_string().split('\n'))-4
+            # table_txt = tabl.get_string(start=table_rows(tabl)-1)
+            # print(f"table_txt = {table_txt}")
             # tabl.add_row([user_question, response])
 
         # st.write(chunks)

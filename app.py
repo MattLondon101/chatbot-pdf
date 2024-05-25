@@ -65,7 +65,6 @@ def main(df):
             elif lofr > 0:
                 df.loc[lofr] = [user_question, response]
 
-            print(f"df = {df}")
             df.to_csv(ocsv, index=False)
 
 

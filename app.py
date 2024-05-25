@@ -16,12 +16,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # import cProfile
 
 
-df = pd.DataFrame(columns=['Question', 'Answer'])
-ocsv = './output/transcript.csv'
-df.to_csv(ocsv)
-
-
-def main():
+def main(df):
 
     load_dotenv()
 
@@ -52,10 +47,8 @@ def main():
         knowledge_base = FAISS.from_texts(chunks,embeddings)
 
         user_question = st.text_input("Ask Question about your PDF:")
-        cnt = 0
+
         if user_question:
-            print(f"Question number {cnt}")
-            cnt += 1
 
             docs = knowledge_base.similarity_search(user_question)
 
@@ -67,8 +60,6 @@ def main():
 
             st.write(response)
 
-            ocsv = './output/transcript.csv'
-            df = pd.read_csv(ocsv)
             lofr = len(df.index)
             if lofr == 0:
                 df = pd.DataFrame([[user_question, response]], columns=['Question', 'Answer'])
@@ -83,7 +74,13 @@ def main():
 
 if __name__ == '__main__':
 
-    main()
+    ocsv = './output/transcript.csv'
+    if os.path.isfile(ocsv) == False:
+        df = pd.DataFrame(columns=['Question', 'Answer'])
+    elif os.path.isfile(ocsv) == True:
+        df = pd.read_csv(ocsv)
+
+    main(df)
     
 
     # cProfile.run('main()')

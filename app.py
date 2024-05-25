@@ -9,13 +9,17 @@ from langchain_community.vectorstores import FAISS #facebook AI similarity searc
 from langchain.chains.question_answering import load_qa_chain
 from langchain_community.llms import HuggingFaceHub
 
-import time
-from line_profiler import LineProfiler
+# from line_profiler import LineProfiler
+# import cProfile
 
 
 def main():
-    start = time.time()
+    
     load_dotenv()
+
+    tabl = PrettyTable()
+    tabl.field
+
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
 
@@ -55,3 +59,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+    # cProfile.run('main()')
+    # lp = LineProfiler()
+    # lp_wrapper = lp(main)
+    # lp_wrapper()
+    # lp.print_stats()

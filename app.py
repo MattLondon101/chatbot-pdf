@@ -16,17 +16,14 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # import cProfile
 
 
-def setup():
-    
+df = pd.DataFrame(columns=['Question', 'Answer'])
+ocsv = './output/transcript.csv'
+df.to_csv(ocsv)
+
 
 def main():
 
     load_dotenv()
-
-    df = pd.DataFrame(columns=['Question', 'Answer'])
-
-    ocsv = './output/transcript.csv'
-    df.to_csv(ocsv)
 
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
@@ -70,16 +67,16 @@ def main():
 
             st.write(response)
 
+            ocsv = './output/transcript.csv'
             df = pd.read_csv(ocsv)
             lofr = len(df.index)
-            print(f"lofr = {lofr}")
             if lofr == 0:
                 df = pd.DataFrame([[user_question, response]], columns=['Question', 'Answer'])
             elif lofr > 0:
                 df.loc[lofr] = [user_question, response]
-            df.to_csv(ocsv, index=False)
-            print(f"df = {df}")
 
+            print(f"df = {df}")
+            df.to_csv(ocsv, index=False)
 
         # st.write(chunks)
 
@@ -87,6 +84,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+    
 
     # cProfile.run('main()')
     # lp = LineProfiler()

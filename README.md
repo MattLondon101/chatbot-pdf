@@ -33,7 +33,7 @@ To run this project, please follow the steps below:
 
 ## Running the Project
 
-Once you have installed the required dependencies, you can run the project using Streamlit, which should have been installed with `requirements.txt`. Streamlit provides an easy way to create interactive web applications in Python.
+Once you have installed the required dependencies, you can run the project using Streamlit. 
 
 To start the application, run the following command:
 
@@ -41,7 +41,11 @@ To start the application, run the following command:
 streamlit run app.py
 ```
 
-This will start the Streamlit server and open the application in your default web browser..  
+This will start the Streamlit server and open the application in your default web browser.  
+
+Transcript of conversation will be written to `./output/transcript.csv`. 
+
+NOTE: `./output/transcript.csv` will be deleted, then recreated upon running `streamlit run app.py`
 
 
 ## License

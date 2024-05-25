@@ -31,7 +31,7 @@ def main(df):
         for page in pdf_reader.pages:
             text += page.extract_text()
 
-        # spilit ito chuncks
+        # spilit into chuncks
         text_splitter = CharacterTextSplitter(
             separator="\n",
             chunk_size=1000,
@@ -66,7 +66,6 @@ def main(df):
                 df.loc[lofr] = [user_question, response]
 
             df.to_csv(ocsv, index=False)
-
 
 
 if __name__ == '__main__':

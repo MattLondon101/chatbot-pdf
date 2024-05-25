@@ -18,7 +18,11 @@ def main():
     load_dotenv()
 
     tabl = PrettyTable()
-    tabl.field_name = ["Question", "Answer"]
+    tabl.field_names= ["Question", "Answer"]
+
+    output_file = './output/transcript.txt'
+    with open(output_file, 'w') as outfi:
+        outfi.write(str(tabl))
 
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
@@ -54,10 +58,16 @@ def main():
 
             st.write(response)
 
-            tabl.add_row([user_question, response])
+            table_rows = lambda tabl: len(tabl.get_string().split('\n'))-4
 
+            table_txt = tabl.get_string(start=table_rows(tabl)-1)
+            print(f"table_txt = {table_txt}")
+
+
+            # tabl.add_row([user_question, response])
 
         # st.write(chunks)
+
 
 if __name__ == '__main__':
     main()

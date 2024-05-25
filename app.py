@@ -14,11 +14,11 @@ from langchain_community.llms import HuggingFaceHub
 
 
 def main():
-    
+
     load_dotenv()
 
     tabl = PrettyTable()
-    tabl.field
+    tabl.field_name = ["Question", "Answer"]
 
     st.set_page_config(page_title="Ask your PDF")
     st.header("Ask Your PDF")
@@ -53,6 +53,8 @@ def main():
             response = chain.run(input_documents=docs,question=user_question)
 
             st.write(response)
+
+            tabl.add_row([user_question, response])
 
 
         # st.write(chunks)

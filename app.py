@@ -15,6 +15,8 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # from line_profiler import LineProfiler
 # import cProfile
 
+if 'count_value' not in st.session_state:
+    st.session_state.count_value = 0
 
 def main(df):
 
@@ -82,6 +84,8 @@ if __name__ == '__main__':
 
     main(df)
     
+    st.write('Count = ', st.session_state.count_value)    
+    st.session_state.count_value += 1
 
     # cProfile.run('main()')
     # lp = LineProfiler()

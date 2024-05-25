@@ -33,7 +33,7 @@ To run this project, please follow the steps below:
 
 ## Running the Project
 
-Once you have installed the required dependencies, you can run the project using Streamlit, which should have been installed with `requirements.txt`. Streamlit provides an easy way to create interactive web applications in Python.
+Once you have installed the required dependencies, you can run the project using Streamlit. 
 
 To start the application, run the following command:
 

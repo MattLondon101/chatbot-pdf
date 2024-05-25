@@ -41,7 +41,11 @@ To start the application, run the following command:
 streamlit run app.py
 ```
 
-This will start the Streamlit server and open the application in your default web browser..  
+This will start the Streamlit server and open the application in your default web browser.  
+
+Transcript of conversation will be written to `./output/transcript.csv`. 
+
+NOTE: `./output/transcript.csv` will be deleted, then recreated upon running `streamlit run app.py`
 
 
 ## License

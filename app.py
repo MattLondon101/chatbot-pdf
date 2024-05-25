@@ -64,7 +64,7 @@ def main(df):
 
             lofr = len(df.index)
             if lofr == 0:
-                df = pd.DataFrame([[user_question, response]], columns=['Question', 'Answer'])
+                df = pd.DataFrame([[user_question, response]], columns=['User_Question', 'Chatbot_Answer'])
             elif lofr > 0:
                 df.loc[lofr] = [user_question, response]
 
@@ -78,13 +78,17 @@ if __name__ == '__main__':
 
     ocsv = './output/transcript.csv'
     if os.path.isfile(ocsv) == False:
-        df = pd.DataFrame(columns=['Question', 'Answer'])
+        df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
     elif os.path.isfile(ocsv) == True:
-        df = pd.read_csv(ocsv)
+        if st.session_state.count_value == 0:
+            os.remove(ocsv)
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
+        elif st.session_state.count_value > 0:
+            df = pd.read_csv(ocsv)
 
     main(df)
     
-    st.write('Count = ', st.session_state.count_value)    
+    # st.write('Count = ', st.session_state.count_value)    
     st.session_state.count_value += 1
 
     # cProfile.run('main()')

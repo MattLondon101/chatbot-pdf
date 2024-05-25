@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 import pandas as pd
-from prettytable import PrettyTable
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -12,11 +11,9 @@ from langchain_community.llms import HuggingFaceHub
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-# from line_profiler import LineProfiler
-# import cProfile
-
 if 'count_value' not in st.session_state:
     st.session_state.count_value = 0
+
 
 def main(df):
 
@@ -34,7 +31,7 @@ def main(df):
         for page in pdf_reader.pages:
             text += page.extract_text()
 
-        # spilit ito chuncks
+        # spilit into chuncks
         text_splitter = CharacterTextSplitter(
             separator="\n",
             chunk_size=1000,
@@ -68,10 +65,7 @@ def main(df):
             elif lofr > 0:
                 df.loc[lofr] = [user_question, response]
 
-            print(f"df = {df}")
             df.to_csv(ocsv, index=False)
-
-        # st.write(chunks)
 
 
 if __name__ == '__main__':
@@ -88,11 +82,4 @@ if __name__ == '__main__':
 
     main(df)
     
-    # st.write('Count = ', st.session_state.count_value)    
     st.session_state.count_value += 1
-
-    # cProfile.run('main()')
-    # lp = LineProfiler()
-    # lp_wrapper = lp(main)
-    # lp_wrapper()
-    # lp.print_stats()

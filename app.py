@@ -58,7 +58,6 @@ def main():
             st.write(response)
 
             table_rows = lambda tabl: len(tabl.get_string().split('\n'))-4
-
             table_txt = tabl.get_string(start=table_rows(tabl)-1)
             print(f"table_txt = {table_txt}")
 

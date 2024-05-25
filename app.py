@@ -19,7 +19,6 @@ def main():
 
     tabl = PrettyTable()
     tabl.field_names= ["Question", "Answer"]
-
     output_file = './output/transcript.txt'
     with open(output_file, 'w') as outfi:
         outfi.write(str(tabl))
@@ -63,7 +62,6 @@ def main():
             table_txt = tabl.get_string(start=table_rows(tabl)-1)
             print(f"table_txt = {table_txt}")
 
-
             # tabl.add_row([user_question, response])
 
         # st.write(chunks)
@@ -71,6 +69,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
     # cProfile.run('main()')
     # lp = LineProfiler()
     # lp_wrapper = lp(main)

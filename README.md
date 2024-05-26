@@ -1,6 +1,6 @@
 # chatbot-pdf
 
-Chat with a PDF and generate a transcript of the conversation. This app can be run locally or with Streamlit in browser.
+Chat with a PDF and generate a transcript of the conversation.
 
 
 ## Installation

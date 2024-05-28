@@ -1,5 +1,6 @@
 # from dotenv import load_dotenv
 import os
+import sys
 # import streamlit as st
 import pandas as pd
 from pypdf import PdfReader
@@ -24,7 +25,9 @@ def main(df):
 
     # pdf = st.file_uploader("Upload your pdf",type="pdf")
 
+    print(f"sys.argv = {sys.argv}")
 
+    pdf = './data/Matt_London_Resume_5_24_24.pdf'
 
     if pdf is not None:
 
@@ -47,7 +50,7 @@ def main(df):
 
         knowledge_base = FAISS.from_texts(chunks,embeddings)
 
-        user_question = st.text_input("Ask Question about your PDF:")
+        # user_question = st.text_input("Ask Question about your PDF:")
 
         if user_question:
 
@@ -89,11 +92,10 @@ if __name__ == '__main__':
             df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
 
 
-    # User input commands        
-    a = str(input("Create new transcript.csv (True or False): "))
-    b = int(input("Enter your HUGGINGFACEHUB_API_TOKEN : "))
-    c = int(input("Enter stop position of sequence: "))
-
+    # User input commands
+    print(f"\nNOTE:\nYou will need your HUGGINGFACEHUB_API_TOKEN to run this app.\nIf you have a Hugging Face account, it can be found at https://huggingface.co/settings/tokens.\nIf you do not have a Hugging Face account, you can create a free one at https://huggingface.co/.\n")        
+    # a = str(input("Create new transcript.csv? (True or False):"))
+    b = str(input("Enter your HUGGINGFACEHUB_API_TOKEN:"))
 
     main(df)
     

@@ -16,7 +16,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 #     st.session_state.count_value = 0
 
 
-def main(df):
+def main(newfi, hftoken, pdfpath, uquestion):
 
     # load_dotenv()
 
@@ -27,11 +27,25 @@ def main(df):
 
     print(f"sys.argv = {sys.argv}")
 
-    pdf = './data/Matt_London_Resume_5_24_24.pdf'
+    ocsv = './output/transcript.csv'
+    if newfi == True:
+        if os.path.isfile(ocsv) == False:
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
+        elif os.path.isfile(ocsv) == True:
+            # if st.session_state.count_value == 0:
+            os.remove(ocsv)
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
+            # elif st.session_state.count_value > 0:
+            #     df = pd.read_csv(ocsv)
+    elif newfi == False:
+        if os.path.isfile(ocsv) == False:
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
 
-    if pdf is not None:
 
-        pdf_reader = PdfReader(pdf)
+
+    if pdfpath is not None:
+
+        pdf_reader = PdfReader(pdfpath)
         text = ""
         for page in pdf_reader.pages:
             text += page.extract_text()
@@ -75,28 +89,13 @@ def main(df):
 
 if __name__ == '__main__':
 
-    newfi = False
-
-    ocsv = './output/transcript.csv'
-    if newfi == True:
-        if os.path.isfile(ocsv) == False:
-            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
-        elif os.path.isfile(ocsv) == True:
-            # if st.session_state.count_value == 0:
-            os.remove(ocsv)
-            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
-            # elif st.session_state.count_value > 0:
-            #     df = pd.read_csv(ocsv)
-    elif newfi == False:
-        if os.path.isfile(ocsv) == False:
-            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
-
-
     # User input commands
     print(f"\nNOTE:\nYou will need your HUGGINGFACEHUB_API_TOKEN to run this app.\nIf you have a Hugging Face account, it can be found at https://huggingface.co/settings/tokens.\nIf you do not have a Hugging Face account, you can create a free one at https://huggingface.co/.\n")        
-    # a = str(input("Create new transcript.csv? (True or False):"))
-    b = str(input("Enter your HUGGINGFACEHUB_API_TOKEN:"))
+    newfi = str(input("Create new transcript.csv? (True or False):"))
+    hftoken = str(input("Enter your HUGGINGFACEHUB_API_TOKEN:"))
+    pdfpath = str(input("Enter path to PDF:"))
+    uquestion = str(input("Enter your question:"))
 
-    main(df)
+    main(newfi, hftoken, pdfpath, uquestion)
     
     # st.session_state.count_value += 1

@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
-import streamlit as st
+# import streamlit as st
 import pandas as pd
 from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -11,18 +11,20 @@ from langchain_community.llms import HuggingFaceHub
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-if 'count_value' not in st.session_state:
-    st.session_state.count_value = 0
+# if 'count_value' not in st.session_state:
+#     st.session_state.count_value = 0
 
 
 def main(df):
 
-    load_dotenv()
+    # load_dotenv()
 
-    st.set_page_config(page_title="Ask your PDF")
-    st.header("Ask Your PDF")
+    # st.set_page_config(page_title="Ask your PDF")
+    # st.header("Ask Your PDF")
 
-    pdf = st.file_uploader("Upload your pdf",type="pdf")
+    # pdf = st.file_uploader("Upload your pdf",type="pdf")
+
+
 
     if pdf is not None:
 
@@ -57,7 +59,7 @@ def main(df):
 
             response = chain.run(input_documents=docs,question=user_question)
 
-            st.write(response)
+            # st.write(response)
 
             lofr = len(df.index)
             if lofr == 0:
@@ -70,16 +72,29 @@ def main(df):
 
 if __name__ == '__main__':
 
+    newfi = False
+
     ocsv = './output/transcript.csv'
-    if os.path.isfile(ocsv) == False:
-        df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
-    elif os.path.isfile(ocsv) == True:
-        if st.session_state.count_value == 0:
+    if newfi == True:
+        if os.path.isfile(ocsv) == False:
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
+        elif os.path.isfile(ocsv) == True:
+            # if st.session_state.count_value == 0:
             os.remove(ocsv)
             df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
-        elif st.session_state.count_value > 0:
-            df = pd.read_csv(ocsv)
+            # elif st.session_state.count_value > 0:
+            #     df = pd.read_csv(ocsv)
+    elif newfi == False:
+        if os.path.isfile(ocsv) == False:
+            df = pd.DataFrame(columns=['User_Question', 'Chatbot_Answer'])
+
+
+    # User input commands        
+    a = str(input("Create new transcript.csv (True or False): "))
+    b = int(input("Enter your HUGGINGFACEHUB_API_TOKEN : "))
+    c = int(input("Enter stop position of sequence: "))
+
 
     main(df)
     
-    st.session_state.count_value += 1
+    # st.session_state.count_value += 1
